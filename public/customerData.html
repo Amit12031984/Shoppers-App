@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body class="container">
+    <div class="row">
+      <div class="col">
+        <h2>Please enter your details.</h2>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-4">
+        <label>Customer Name</label>
+        <input type="text" name="name" class="form-control" id="name" /><br />
+
+        <label>Customer City</label>
+        <input type="text" name="city" class="form-control" id="city" /><br />
+
+        <label>Customer Country</label>
+        <input
+          type="text"
+          name="country"
+          class="form-control"
+          id="country"
+        /><br />
+
+        <label>Customer Pincode</label>
+        <input
+          type="number"
+          name="pincode"
+          class="form-control"
+          id="pincode"
+        /><br />
+
+        <label>Total Amount:</label>
+        <input
+          type="number"
+          name="amount"
+          class="form-control"
+          id="totalamount"
+          disabled
+        /><br />
+        <button class="btn btn-success" id="btnsave">Save</button>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      let totalPrice = localStorage.getItem("total");
+      $("#totalamount").val(totalPrice);
+
+      let btnsave = document.getElementById("btnsave");
+      btnsave.addEventListener("click", () => {
+        let name = $("#name").val();
+        let city = $("#city").val();
+        let country = $("#country").val();
+        let pincode = $("#pincode").val();
+        console.log("click",name, city, country, pincode);
+
+        localStorage.setItem("name", name);
+        localStorage.setItem("city", city);
+        localStorage.setItem("country", country);
+        localStorage.setItem("pincode", pincode);
+
+        window.location.pathname = "/customer";
+      });
+    </script>
+  </body>
+</html>
