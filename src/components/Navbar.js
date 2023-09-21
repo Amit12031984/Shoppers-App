@@ -19,6 +19,7 @@ export default function Navbar(props) {
     const maxValue = productData.reduce((max,item)=>{
       return Math.max(max,Number(item.sn))
     },0)
+    return maxValue;
   }
 
   useEffect(() => {
