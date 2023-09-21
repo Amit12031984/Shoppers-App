@@ -3,7 +3,7 @@ import '../App.css';
 import * as bootstrap from 'bootstrap';
 
 export default function Card(props) {
-
+  
   const collectData = (event)=>
   {
     if(localStorage.getItem("cart")==null)
@@ -38,7 +38,7 @@ export default function Card(props) {
     {
       myCartData = myCartData + "<b>NAME: </b>" + myCart[i][1] + "<b> QTY: </b>" + myCart[i][0] + "<b> PRICE: </b>" + myCart[i][2] + "<br/>";
     }
-    myCartData = myCartData + "<a href=productsData.html className=btn btn-success>Continue</a>"
+    myCartData = myCartData + `<a href=productsData.html className=btn btn-success>Continue</a>`
     document.getElementById("mypopover").setAttribute("data-bs-content",myCartData);
     var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
       var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {

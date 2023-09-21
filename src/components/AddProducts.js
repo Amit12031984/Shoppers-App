@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { myDatabase } from "../firebase.js";
 import { useNavigate } from 'react-router-dom';
 
-export default function AddProducts() {
+export default function AddProducts(props) {
 
   const navigate = useNavigate();
 
   const [productData,setProductData] = useState({
-    productSno:"",
+    productSno:props.id,
     productName:"",
     productImageUrl:"",
     productDescription:"",
@@ -43,9 +43,10 @@ export default function AddProducts() {
 
   return (
     <div className="row" style={{ margin: "10px" }}>
+      {console.log(props.id)}
       <div className="col-3">
         <label>Product SNo</label>
-        <input type="number" name="productSno" className="form-control" onChange={collectIt}/>
+        <input type="number" name="productSno" className="form-control" value={props.id} disabled onChange={collectIt}/>
         <br />
 
         <label>Product Name</label>

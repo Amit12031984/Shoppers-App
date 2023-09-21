@@ -12,15 +12,31 @@ export default function Navbar(props) {
   const [productsData, setProductsData] = useState([]);
   const [searchtext,setSearchText] = useState("");
 
+  const [ProductId,setProductId] = useState(0);
+  
+  const calcProductId = (productData)=>
+  {
+    const maxValue = productData.reduce((max,item)=>{
+      return Math.max(max,Number(item.sn))
+    },0)
+  }
+
   useEffect(() => {
-    myDatabase.collection("products").onSnapshot((snapshot) => {
-      setProductsData(
+    myDatabase.collection("products").onSnapshot(async (snapshot) => {
+      await setProductsData(
           snapshot.docs.map((item) => {
               return item.data();
           })
         );
     });
+    console.log("effect 1")
   },[]);
+
+  useEffect(()=>
+  {
+    setProductId(calcProductId(productsData) + 1);
+    console.log("effect 2")
+  },[productsData])
 
   const pleaseLogout = () => {
     localStorage.removeItem("cart");
@@ -89,7 +105,7 @@ export default function Navbar(props) {
                       </Link>
                     </li>
                     <li className="nav-item">
-                    <button type="button" className="nav-link text-white btn btn-secondary me-2" tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-html="true" data-bs-content="" data-bs-trigger="focus" id="mypopover">
+                    <button type="button" className="nav-link text-white btn btn-secondary me-2" tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-html="true" data-bs-content="" data-bs-trigger="focus" id="mypopover">
                     Cart
                     </button>
                     </li>
@@ -130,7 +146,7 @@ export default function Navbar(props) {
         <Route path="/home" element={props.initial ? <Card productsData = {productsData}/> : ""}></Route>
         <Route
           path="/add"
-          element={props.initial ? <AddProducts /> : ""}
+          element={props.initial ? <AddProducts id={ProductId}/> : ""}
         ></Route>
         <Route
           path="/login"
